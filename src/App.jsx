@@ -8,16 +8,16 @@ const VALID_CREDENTIALS = {
 };
 
 const mensajesError = [
-    'Prueba otra vez, hermosa ;) ❤️',
-    'Casi casi... ¡Tú puedes mi amor! 💕',
-    'Pista. ¿Domingo...? :)',
-    '¿Hoy en 8 días más? 💜',
-    ': <-- ¿solo eso? jsjsjs',
-    '27',
-    'Respira, piensa y vuelve a intentar ❤️',
-    '¡Vamos mi princesita! ¡Casi lo tienes! ;) guiño guiño 💖',
-    'Uy, ese no era... ¡Ya no tardas, hermosa! 💘',
-    'JAJAJAJAJAJA, TE AMO! ❤️‍🔥'
+    '¿Ya viste en Whatsapp? ❤️',
+    '¿Te parece raro Domingo? 💕',
+    'Primero el día y ¿¿¿despues???',
+    'Que raro que solo 21 y 27, ¿no?💜',
+    'no estás dejando pasar una pista importante? 💖',
+    'Bueno, te la pondré de nuevo',
+    'JAJAJAJAJAJAJA, ¿cuál será? ❤️',
+    '¡Vamos mi princesita! ¡Casi lo tienes! ;) guiño guiño 💖 guiño guiño otra vez',
+    ': <--- ¿otra vez? 💘',
+    'Todavía no????? ❤️‍🔥'
   ];
 
 export default function RomanticLogin({ onLoginSuccess }) {
