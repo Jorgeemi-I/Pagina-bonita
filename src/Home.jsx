@@ -10,14 +10,14 @@ export default function Home({ username, onLogout }) {
   const cartaRef = useRef(null);
 
   const cartas = [
-    { id: 1, titulo: 'Primera Cartita En este formato', mensaje: 'Todavía no he actualizado la cartita, preciosa, perdoname.', fecha: '06/11', fechaCompleta: '2025-11-27' },
-    // { id: 2, titulo: 'Recuerdo Especial 🌟', mensaje: 'Escribe sobre ese momento que nunca olvidarás...', fecha: '07/11', fechaCompleta: '2025-11-07' },
-    // { id: 3, titulo: 'Promesa Eterna 💍', mensaje: 'Escribe tus promesas más sinceras...', fecha: '08/11', fechaCompleta: '2025-11-08' },
-    // { id: 4, titulo: 'Momento Mágico ✨', mensaje: 'Describe ese instante perfecto...', fecha: '09/11', fechaCompleta: '2025-11-09' },
-    // { id: 5, titulo: 'Dulce Sorpresa 🎁', mensaje: 'Escribe una sorpresa especial...', fecha: '10/11', fechaCompleta: '2025-11-10' },
-    // { id: 6, titulo: 'Mi Corazón ❤️', mensaje: 'Expresa todo lo que sientes...', fecha: '11/11', fechaCompleta: '2025-11-11' },
-    // { id: 7, titulo: 'Pensando en Ti 🌙', mensaje: 'Cada noche pienso en ti...', fecha: '12/11', fechaCompleta: '2025-11-12' },
-    // { id: 8, titulo: 'Nuestro Futuro 🌈', mensaje: 'Sueño con nuestro futuro juntos...', fecha: '13/11', fechaCompleta: '2025-11-13' },
+    { id: 1, titulo: 'Primera Cartita aquí, espero te guste', mensaje: 'Holaaaaa holaaaaa, mi cielito hermoso, meno, veo que lograste entrar, tuve que ayudarte, pero ya estás aquí, y ya viste lo que preparé para ti, meno, talvez no me tomó tanto tiempo, pero esto, es para que no tengas que esperar tanto tiempo por tus cartitas, aunque si lo prefieres, puedes decirme y regresamos a escribirlas a mano🥺❤️ Y si, espero que te guste todo esto que he preparado para ti, y todo tiene una ventaja, talvez hayan cartitas más largas, como talvez algún día haya cartitas más cortas, pero quiero que sepas que estoy lo hice con mucho amor, y si le echas un ojito, abajo puedes guardar la carita en tu teléfono, espero que te guste, mi cielito hermoso 🥺❤️🥰', fecha: '06/11', fechaCompleta: '2025-11-06', fec: '06 de Noviembre del 2025'},
+    { id: 2, titulo: 'Espero que te guste, mi amor', mensaje: 'Hola mi princesita hermosa, ya leíste la primera cartita, y cues espero que todo te haya gustado, desde cómo se ve, como se abre y todo, meno, cues que se note ahora que tienes un novio programador🙈❤️ talvez en algunos días veas cambios, actualizaciones, nuevos apartados, y quiero que sepas que cada uno de ellos, estarán hechos con el mismo amor y mismo cariño para ti, mi princesita hermosa, espero que cada función, nueva te guste como espero te hayas gustado está, te amo, te amooooooooooo, te amoooooo, y se que dirás que pude haber hecho algo como esto antes, Pero meno, ahora estoy un poquito más desocupado y espero en verdad que te guste 🥺❤️✨', fecha: '07/11', fechaCompleta: '2025-11-07', fec: '07 de Noviembre del 2025'},
+    { id: 3, titulo: 'Todo es con mucho cariño para tí mi cirlito', mensaje: 'Holaaaaa, mi princesitaaaaaaa hermosaaaaaa, otra cartita más de estas, talvez algunos días, no pueda tener tiempo, y vas a ver, que talvez hayan cartitas que estén bloqueadas, y se desbloquearan, el día del que sean, aunque puedes intentar abrirlas si así lo prefieres 🙈❤️ Yo veo todo esto, y digo, owww que monito, y espero que digas lo mismo tú, lo meno de esto, es que como ves, podemos usar emojis para que se vea más bonito, y Sipis, ya viste que afuera también puedo poner una frase bonita? Meno, cues es igual como las cartitas a mano, la única diferencia es que ahora lo puedes guardar en tu teléfono, aunque esto no significa que no vayan a haber cartitas a mano, claro que lo habrán, así como me habías dicho, talvez una cada semana, una cada vez, aunque ese día también habrán cartitas por aquí, mi amor 🥺❤️✨', fecha: '08/11', fechaCompleta: '2025-11-08', fec: '08 de Noviembre del 2025'},
+    { id: 4, titulo: 'Te amooo con todo mi corazon, mi cielito hermoso', mensaje: 'Holaaaaa, mi cielito hermoso, meno, empezamos ya con las cartitas bonitas, se que dijiste, yaya mucha explicación JAJAJA🙈❤️ Pero meno, está carita es diferente, mi cielito, recordándote nuevamente que eres lo que más amo en el mundo, que eres todo lo que quiero para mí futuro, te amoooo con toda el alma, y que quiero que estés conmigo para siempre, te amoooo mi cielito hermoso, me gustas muchísimo, me encantas demasiado, estoy súper enamorado de ti y de tus ojitos preciosos, me encanta ver tu carita toda preciosa, me encanta todo de ti, estoy y estaré obsesionado con mi noviecita preciosa, porque me encantas, mi amor y me encantas toda la vidaaaa, eres lo más bonito de mi vida, mi amor, y espero que todo esto y las nuevas caritas te gusten🥺❤️🙈', fecha: '09/11', fechaCompleta: '2025-11-09',fec: '09 de Noviembre del 2025' },
+    { id: 5, titulo: 'Prontito estará disponible', mensaje: '', fecha: '10/11', fechaCompleta: '2025-11-30' },
+    { id: 6, titulo: 'Prontito estará disponible', mensaje: '', fecha: '11/11', fechaCompleta: '2025-11-30' },
+    { id: 7, titulo: 'Prontito estará disponible', mensaje: '', fecha: '12/11', fechaCompleta: '2025-11-30' },
+    { id: 8, titulo: 'Prontito estará disponible', mensaje: '', fecha: '13/11', fechaCompleta: '2025-11-30' },
   ];
 
   // Función para verificar si una carta está desbloqueada
@@ -212,9 +212,9 @@ export default function Home({ username, onLogout }) {
                 <div className="carta-header">
                   <h2 className="carta-titulo-modal">{cartaActual?.titulo}</h2>
                   <div className="carta-decoracion">
-                    <span>❤</span>
-                    <span>✨</span>
-                    <span>💕</span>
+                    <span>❤️</span>
+                    <span>❤️</span>
+                    <span>❤️</span>
                   </div>
                 </div>
                 
@@ -222,18 +222,19 @@ export default function Home({ username, onLogout }) {
                   className="carta-texto"
                   value={textoEditable}
                   onChange={(e) => setTextoEditable(e.target.value)}
-                  placeholder="Escribe tu carta aquí..."
+                  placeholder=""
                   rows="12"
                 />
                 
                 <div className="carta-footer">
-                  <p className="carta-firma">Con amor, {username} 💜</p>
+                  <p className="carta-firma">Con amor, para mi noviecita preciosa ❤️</p>
                   <div className="carta-fecha">
-                    {new Date().toLocaleDateString('es-ES', { 
+                    {/* {new Date().toLocaleDateString('es-ES', { 
                       year: 'numeric', 
                       month: 'long', 
                       day: 'numeric' 
-                    })}
+                    })} */}
+                    {cartaActual?.fec}
                   </div>
                 </div>
               </div>
