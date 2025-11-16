@@ -8,6 +8,10 @@ export default function Home({ username, onLogout }) {
   const [textoEditable, setTextoEditable] = useState('');
   const [bloqueadoModal, setBloqueadoModal] = useState(false);
   const cartaRef = useRef(null);
+  const apodos = ['Mi princesita hermosa', 'Mi cielito hermoso', 'Mi amorcito', 'Mi vidita preciosa', 'Mi amor', 'Mi vida', 'Mi corazon', 'Mi niña hermosa'];
+  const saludo = new Date().getHours() < 12 ? "menos días" :
+               new Date().getHours() < 19 ? "menas tardes" :
+               "menas noches";
 
   const cartas = [
     { id: 1, titulo: 'Primera Cartita aquí, espero te guste', mensaje: 'Holaaaaa holaaaaa, mi cielito hermoso, meno, veo que lograste entrar, tuve que ayudarte, pero ya estás aquí, y ya viste lo que preparé para ti, meno, talvez no me tomó tanto tiempo, pero esto, es para que no tengas que esperar tanto tiempo por tus cartitas, aunque si lo prefieres, puedes decirme y regresamos a escribirlas a mano🥺❤️ Y si, espero que te guste todo esto que he preparado para ti, y todo tiene una ventaja, talvez hayan cartitas más largas, como talvez algún día haya cartitas más cortas, pero quiero que sepas que estoy lo hice con mucho amor, y si le echas un ojito, abajo puedes guardar la carita en tu teléfono, espero que te guste, mi cielito hermoso 🥺❤️🥰', fecha: '06/11', fechaCompleta: '2025-11-06', fec: '06 de Noviembre del 2025'},
@@ -18,6 +22,8 @@ export default function Home({ username, onLogout }) {
     { id: 6, titulo: 'Prontito estará disponible', mensaje: '', fecha: '11/11', fechaCompleta: '2025-11-30' },
     { id: 7, titulo: 'Prontito estará disponible', mensaje: '', fecha: '12/11', fechaCompleta: '2025-11-30' },
     { id: 8, titulo: 'Prontito estará disponible', mensaje: '', fecha: '13/11', fechaCompleta: '2025-11-30' },
+    { id: 7, titulo: 'Prontito estará disponible', mensaje: '', fecha: '14/11', fechaCompleta: '2025-11-30' },
+    { id: 8, titulo: 'Prontito estará disponible', mensaje: '', fecha: '15/11', fechaCompleta: '2025-11-30' },
   ];
 
   // Función para verificar si una carta está desbloqueada
@@ -66,12 +72,46 @@ export default function Home({ username, onLogout }) {
     const html2canvas = (await import('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/+esm')).default;
     
     if (cartaRef.current) {
+      // Encontrar el textarea y guardarlo temporalmente
+      const textarea = cartaRef.current.querySelector('.carta-texto');
+      const textoOriginal = textarea.value;
+      
+      // Crear un div temporal con el texto formateado
+      const divTemporal = document.createElement('div');
+      divTemporal.className = 'carta-texto-captura';
+      divTemporal.style.cssText = `
+        width: 100%;
+        min-height: 300px;
+        padding: 20px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #374151;
+        font-family: 'Georgia', serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      `;
+      divTemporal.textContent = textoOriginal;
+      
+      // Reemplazar temporalmente el textarea con el div
+      textarea.style.display = 'none';
+      textarea.parentNode.insertBefore(divTemporal, textarea);
+      
+      // Esperar un momento para que se renderice
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Capturar la imagen
       const canvas = await html2canvas(cartaRef.current, {
         backgroundColor: '#ffffff',
         scale: 2,
         logging: false,
+        useCORS: true,
       });
       
+      // Restaurar el textarea
+      divTemporal.remove();
+      textarea.style.display = 'block';
+      
+      // Descargar la imagen
       const link = document.createElement('a');
       link.download = `carta-${cartaActual.id}-${Date.now()}.jpg`;
       link.href = canvas.toDataURL('image/jpeg', 0.95);
@@ -122,7 +162,7 @@ export default function Home({ username, onLogout }) {
       {/* Contenido principal */}
       <div className="home-content">
         <div className="welcome-section">
-          <h2 className="welcome-title">¡Hola Mi vida! 💜</h2>
+          <h2 className="welcome-title">¡Hola {apodos[Math.floor(Math.random() * apodos.length)]}, {saludo}! ❤️</h2>
           <p className="welcome-subtitle">Lo lograsteeeee :D</p>
         </div>
 
