@@ -79,6 +79,40 @@ export default function RomanticLogin({ onLoginSuccess }) {
             </svg>
           </div>
         ))}
+        {/* Fuegos artificiales */}
+        {[...Array(8)].map((_, i) => (
+    <div
+        key={`firework-${i}`}
+        className="firework"
+        style={{
+            left: `${10 + Math.random() * 80}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            
+            // AUMENTAMOS la duración total de la animación:
+            animationDuration: `${4 + Math.random() * 3}s` 
+        }}
+    >
+        {/* Aquí añadimos el elemento para el rastro ascendente */}
+        <div className="firework-rocket"></div> 
+
+        {[...Array(12)].map((_, j) => (
+            <div
+                key={`spark-${j}`}
+                className="spark"
+                style={{
+                    // Asumiendo que tus '--tx' y '--ty' están definidos en CSS por nth-child.
+                    // Si 'transform' es solo para la rotación del grupo, está bien.
+                    // Los '--tx' y '--ty' son para la distancia de cada chispa.
+                    transform: `rotate(${j * 30}deg)`
+                }}
+            />
+        ))}
+    </div>
+))}
+{/* Círculos de brillo de fondo */}
+    <div className="background-burst" style={{ top: '20%', left: '15%', animationDelay: '0s' }}></div>
+    <div className="background-burst" style={{ bottom: '10%', right: '25%', animationDelay: '3s' }}></div>
+    <div className="background-burst" style={{ top: '60%', right: '10%', animationDelay: '6s' }}></div>
       </div>
 
       {/* Contenedor principal */}
@@ -93,14 +127,14 @@ export default function RomanticLogin({ onLoginSuccess }) {
               />
             </svg>
           </div>
-          <h1 className="title">Te Amo &lt;3</h1>
+          <h1 className="title">Te amooooo &lt;3</h1>
         </div>
 
         {/* Lado derecho - Formulario */}
         <div className="right-side">
           <div className="form-card">
             <h2 className="form-title">
-              ESPEREMOS QUE NO TE TOME<br />MUCHO TIEMPO &lt;3
+              HOLA DE NUEVO<br />MI PRINCESITA HERMOSA &lt;3
             </h2>
 
             <div className="form-content">
