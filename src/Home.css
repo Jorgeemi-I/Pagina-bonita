@@ -407,13 +407,15 @@
   line-height: 1.8;
   color: #374151;
   resize: vertical;
-  font-family: 'Georgia', serif;
+  font-family: 'Sour Gummy', cursive;
+  font-weight: 400;
   outline: none;
 }
 
 .carta-texto::placeholder {
   color: #9ca3af;
   font-style: italic;
+  font-family: 'Sour Gummy', cursive;
 }
 
 .carta-footer {
