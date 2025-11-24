@@ -98,7 +98,7 @@ export default function Home({ username, onLogout }) {
         font-size: 18px;
         line-height: 1.8;
         color: #374151;
-        font-family: 'Sour Gummy', cursive;
+        font-family: 'Sour Gummy', -apple-system, BlinkMacSystemFont, sans-serif;
         font-weight: 400;
         white-space: pre-wrap;
         word-wrap: break-word;
