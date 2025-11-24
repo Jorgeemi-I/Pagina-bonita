@@ -8,6 +8,7 @@ export default function Home({ username, onLogout }) {
   const [textoEditable, setTextoEditable] = useState('');
   const [bloqueadoModal, setBloqueadoModal] = useState(false);
   const cartaRef = useRef(null);
+
   const apodos = ['Mi princesita hermosa', 'Mi cielito hermoso', 'Mi amorcito', 'Mi vidita preciosa', 'Mi amor', 'Mi vida', 'Mi corazon', 'Mi niña hermosa'];
   const saludo = new Date().getHours() < 12 ? "menos días" :
                new Date().getHours() < 19 ? "menas tardes" :
@@ -97,7 +98,8 @@ export default function Home({ username, onLogout }) {
         font-size: 18px;
         line-height: 1.8;
         color: #374151;
-        font-family: 'Georgia', serif;
+        font-family: 'Sour Gummy', cursive;
+        font-weight: 400;
         white-space: pre-wrap;
         word-wrap: break-word;
       `;
