@@ -8,16 +8,8 @@ const VALID_CREDENTIALS = {
 };
 
 const mensajesError = [
-    '¿Ya viste en Whatsapp? ❤️',
-    '¿Te parece raro Domingo? 💕',
-    'Primero el día y ¿¿¿despues???',
-    'Que raro que solo 21 y 27, ¿no?💜',
-    'no estás dejando pasar una pista importante? 💖',
-    'Bueno, te la pondré de nuevo',
-    'JAJAJAJAJAJAJA, ¿cuál será? ❤️',
-    '¡Vamos mi princesita! ¡Casi lo tienes! ;) guiño guiño 💖 guiño guiño otra vez',
-    ': <--- ¿otra vez? 💘',
-    'Todavía no????? ❤️‍🔥'
+    '¿Intenta de nuevo preciosa? ❤️',
+    '¿En algo te equivocaste, mi amor? 💕'
   ];
 
 export default function RomanticLogin({ onLoginSuccess }) {
