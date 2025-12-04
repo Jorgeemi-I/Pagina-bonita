@@ -1,6 +1,44 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import './Home.css';
 
+// --- Componente interno para los globos ---
+const Globos = () => {
+  // Generamos los globos una sola vez con useMemo
+  const balloons = useMemo(() => {
+    const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#FF9F43', '#54A0FF', '#ff7675', '#a29bfe'];
+    return Array.from({ length: 25 }).map((_, i) => ({
+      id: i,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      left: Math.floor(Math.random() * 100) + '%',
+      duration: (Math.floor(Math.random() * 5) + 8) + 's', // Entre 8 y 13 seg
+      delay: Math.floor(Math.random() * 5) + 's',
+      scale: (Math.floor(Math.random() * 4) + 8) / 10
+    }));
+  }, []);
+
+  return (
+    <div className="balloon-container">
+      {balloons.map((b) => (
+        <div
+          key={b.id}
+          className="balloon"
+          style={{
+            backgroundColor: b.color,
+            left: b.left,
+            animationDuration: b.duration,
+            animationDelay: b.delay,
+            transform: `scale(${b.scale})`,
+            boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.1)'
+          }}
+        >
+          <div className="string"></div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// --- Tu Componente Principal ---
 export default function Home({ username, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -11,12 +49,13 @@ export default function Home({ username, onLogout }) {
 
   const apodos = ['Mi princesita hermosa', 'Mi cielito hermoso', 'Mi amorcito', 'Mi vidita preciosa', 'Mi amor', 'Mi vida', 'Mi corazon', 'Mi niña hermosa'];
   const saludo = new Date().getHours() < 12 ? "menos días" :
-               new Date().getHours() < 19 ? "menas tardes" :
-               "menas noches";
+                 new Date().getHours() < 19 ? "menas tardes" :
+                 "menas noches";
 
   const mensajeBonito =['Espero que hayas teniendo un día tan hermoso como tú.','Cada día que pasa, mi amor por ti crece más y más.',  '¡Te amo con todo mi corazón!❤️', 'Eres la razón de mi felicidad día a día.','No puedo esperar para verte y abrazarte pronto.','Eres mi todo, mi amor bonito.','Gracias por ser la luz de mi vida.','Quiero estár contigo todos los días de mi vida.','Eres mi inspiración, lo mejor y lo más bonito que tengo en la vida.','Contando los días para volvernos a ver.','Te extraño muchísio, mi amor :('];             
+  
   const cartas = [
-    { id: 1, titulo: 'Primera Cartita aquí, espero te guste❤️', mensaje: 'Holaaaaa holaaaaa, mi cielito hermoso, meno, veo que lograste entrar, tuve que ayudarte, pero ya estás aquí, y ya viste lo que preparé para ti, meno, talvez no me tomó tanto tiempo, pero esto, es para que no tengas que esperar tanto tiempo por tus cartitas, aunque si lo prefieres, puedes decirme y regresamos a escribirlas a mano🥺❤️ Y si, espero que te guste todo esto que he preparado para ti, y todo tiene una ventaja, talvez hayan cartitas más largas, como talvez algún día haya cartitas más cortas, pero quiero que sepas que esto lo hice con mucho amor, y si le echas un ojito, abajo puedes guardar la carita en tu teléfono, espero que te guste, mi cielito hermoso 🥺❤️🥰', fecha: '06/11', fechaCompleta: '2025-11-06', fec: '06 de Noviembre del 2025'},
+     { id: 1, titulo: 'Primera Cartita aquí, espero te guste❤️', mensaje: 'Holaaaaa holaaaaa, mi cielito hermoso, meno, veo que lograste entrar, tuve que ayudarte, pero ya estás aquí, y ya viste lo que preparé para ti, meno, talvez no me tomó tanto tiempo, pero esto, es para que no tengas que esperar tanto tiempo por tus cartitas, aunque si lo prefieres, puedes decirme y regresamos a escribirlas a mano🥺❤️ Y si, espero que te guste todo esto que he preparado para ti, y todo tiene una ventaja, talvez hayan cartitas más largas, como talvez algún día haya cartitas más cortas, pero quiero que sepas que esto lo hice con mucho amor, y si le echas un ojito, abajo puedes guardar la carita en tu teléfono, espero que te guste, mi cielito hermoso 🥺❤️🥰', fecha: '06/11', fechaCompleta: '2025-11-06', fec: '06 de Noviembre del 2025'},
     { id: 2, titulo: 'Espero que te guste, mi amor❤️', mensaje: 'Hola mi princesita hermosa, ya leíste la primera cartita, y cues espero que todo te haya gustado, desde cómo se ve, como se abre y todo, meno, cues que se note ahora que tienes un novio programador🙈❤️ talvez en algunos días veas cambios, actualizaciones, nuevos apartados, y quiero que sepas que cada uno de ellos, estarán hechos con el mismo amor y mismo cariño para ti, mi princesita hermosa, espero que cada función nueva te guste como espero te haya gustado esta, te amo, te amooooooooooo, te amoooooo, y se que dirás que pude haber hecho algo como esto antes, pero meno, ahora estoy un poquito más desocupado y espero en verdad que te guste 🥺❤️✨', fecha: '07/11', fechaCompleta: '2025-11-07', fec: '07 de Noviembre del 2025'},
     { id: 3, titulo: 'Todo es con mucho cariño para tí mi cielito❤️', mensaje: 'Holaaaaa, mi princesitaaaaaaa hermosaaaaaa, otra cartita más de estas, talvez algunos días, no pueda tener tiempo, y vas a ver, que talvez hayan cartitas que estén bloqueadas, y se desbloquearan, el día del que sean, aunque puedes intentar abrirlas si así lo prefieres 🙈❤️ Yo veo todo esto, y digo, owww que monito, y espero que digas lo mismo tú, lo meno de esto, es que como ves, podemos usar emojis para que se vea más bonito, y Sipis, ya viste que afuera también puedo poner una frase bonita? Meno, cues es igual como las cartitas a mano, la única diferencia es que ahora lo puedes guardar en tu teléfono, aunque esto no significa que no vayan a haber cartitas a mano, claro que lo habrán, así como me habías dicho, talvez una cada semana, una cada vez, aunque ese día también habrán cartitas por aquí, mi amor 🥺❤️✨', fecha: '08/11', fechaCompleta: '2025-11-08', fec: '08 de Noviembre del 2025'},
     { id: 4, titulo: 'Te amooo con todo mi corazon, mi cielito hermoso❤️', mensaje: 'Holaaaaa, mi cielito hermoso, meno, empezamos ya con las cartitas bonitas, se que dijiste, yaya mucha explicación JAJAJA🙈❤️ Pero meno, esta carita es diferente, mi cielito, recordándote nuevamente que eres lo que más amo en el mundo, que eres todo lo que quiero para mi futuro, te amoooo con toda el alma, y que quiero que estés conmigo para siempre, te amoooo mi cielito hermoso, me gustas muchísimo, me encantas demasiado, estoy súper enamorado de ti y de tus ojitos preciosos, me encanta ver tu carita toda preciosa, me encanta todo de ti, estoy y estaré obsesionado con mi noviecita preciosa, porque me encantas, mi amor y me encantas toda la vidaaaa, eres lo más bonito de mi vida, mi amor, y espero que todo esto y las nuevas caritas te gusten🥺❤️🙈', fecha: '09/11', fechaCompleta: '2025-11-09',fec: '09 de Noviembre del 2025' },
@@ -44,31 +83,23 @@ export default function Home({ username, onLogout }) {
     {id:24, titulo:'Para la niña que no importa el tiempo que pasé la amaré más y más 🥺❤️', mensaje:'Holaaaaa, mi cielito hermoso, hoy empezamos un mesecito nuevo, y que bonito que es a tu ladito, y quiero que sepas que no importa el tiempo que pase, yo te seguiré amando con la misma e incluso intensidad de lo que lo he hecho, no importa cuantos días, meses o años pasen, mi amor por ti nunca disminuirán, porque pienso amarte cada segundo de mi vida, y quiero que lo sepas, que recuerdes y que nunca dudes de este inmenso amor que te tengo, quiero que siempre recuerdes lo mucho que te amooooo, y que estés segura que así será siempre, y sé que no me alcanzará la vida ni las palabras para expresarte y demostrarte todo este infinito amor que te tengo, te amooo con toda mi alma y te prometo que haré todo lo posible para que nunca lo dudes, porque yo quiero que siempre recuerdes que tu noviecito te ama mucho, que eres lo más importante de su vida y que daría la vida por tí, te amooo mi princesita hermosa, prometo hacerlo siempre y hacerte la niña más feliz del mundo, besitos, mi princesita hermosa 🥺❤️🥰', fecha: '01/12', fechaCompleta: '2025-12-01', fec: '01 de Diciembre del 2025'},
     {id:25, titulo:'Para la niña que es mi única opción para toda la vida 🥺❤️', mensaje:'Hola mi cielito hermoso, soy yo de nuevo un día más, y meno yo sé que ya lo sabes, Pero te lo recordaré otra vez, te amoooooooooo demasiado, te amooo con todo mi corazón y mi alma, y haré todo porque seas la niña más feliz del mundo siempre, te amooooooooooo infinitamente, mi cielito hermoso, muchas gracias por llegar a mi vida, por hacerme demasiado demasiadooooooooo feliz y por estar conmigo todo este tiempo, gracias por absolutamente todo lo que haces por mí, por todo lo bonito, y por todo todo, te amooo demasiado y te prometo que eso nadie lo cambiará, puedes confiar en mi y en qué solo te amo y tengo ojos para ti, solo a ti te voy a ver con ojos de amor, solo a ti te quiero besar, abrazar, acariciar y hacer todo contigo, porque eres lo que querré para siempre, y te lo demostraré para que nunca lo dudes y que cada que me veas sepas con seguridad que a pesar de todo lo que pasaría siempre te elegiré a tí una y otra vez, aunque siempre serás mi única opción, solo contigo quiero estar y formar una familia muy bonita, la familia más bonita del mundo solo a tu ladito, te amoooooooooo infinitamente, mi princesita hermosa, besitos 🥺❤️✨', fecha: '02/12', fechaCompleta: '2025-12-02', fec: '02 de Diciembre del 2025'},
     {id:26, titulo:'Para la preciosotaaaa que me encantaaaaaa🙈❤️', mensaje:'Holaaa holaaaaa amor de mi vida, sabías que me gustas demasiado, y que me encantas muchísimo?? Que meno que sí, porque te lo haré saber siempre, estoy súper enamorado de ti, solo pienso en ti y digo "ay que preciosa está mi noviecita, que me haga papá"🙈❤️ JAJA, me encantas amor de mi vida, quiero besarteeeee pero así muchísimo y hacerte el amor toda mi vida, me encantas demasiado, me encanta todo de ti, me encanta tu carita preciosa, tus ojitos, tus labiecitos, toda tu y tú cuerpecito preciosoooo, cómo me encantaaaaaaaaaass, cásate conmigo pofiiiiis, que quiero que seas la mami de mis hijos y quiero hacer de todo contigo, preciosa 🙈❤️ cómo me encantaaaaaaaaaass, me encanta que me voltees los ojitos (y también cuando estás enojada🙈❤️), te amooo y me encantaaaas, quiero que estés conmigo para siempre, mi amor, besame toda la vida porque yo soy solo tuyo y porsupuesto que tú eres toda mía y así será para siempre, me gustas, me encantas, me fascinaaas y estoy súper enamorado de ti, y te juro que así será siempre, mi amor, besame y quédate conmigo toda la vida pofiiiiis, te amooo, besitos 🙈❤️🥺', fecha: '03/12', fechaCompleta: '2025-12-03', fec: '03 de Diciembre del 2025'},
-    // {id:27, titulo:'', mensaje:'', fecha: '04/12', fechaCompleta: '2025-12-04', fec: '04 de Diciembre del 2025'},
+    {id:27, titulo:'Feliiiiiiiz cumpleaños, a la niña más preciosa e increíble del mundo 🥺❤️✨', mensaje:'Holaaaaa holaaaaa, mi cielito hermoso, hoy es un día muy especial, porque la niña más maravillosa e increíble del mundo cumple un añito más de vida, feliz cumpleaños, mi princesita hermosa, que este día esté lleno de felicidad, amor, alegría y bendiciones para ti, que hoy te la pases demasiado demasiadooooooooo bien y al lado de tus seres queridos 🥺❤️ Te amooo infinitamente y así como lo he hecho estos últimos tres cumpleaños tuyos, espero pasar todos los que restan a tu ladito, porque quiero hacer que este día sea especial y muy feliz para ti, y que siempre lo recuerdes, quiero que ames los días de tu cumpleaños y que te la pases de lo mejor, te amoooo mi princesita hermosa, y deseo acompañarte todos tus cumpleaños y días de tu vida, te amooooooooooo, besitos, mi princesita hermosa 🥺❤️✨', fecha: '04/12', fechaCompleta: '2025-12-04', fec: '04 de Diciembre del 2025'},
     // {id:28, titulo:'', mensaje:'', fecha: '05/12', fechaCompleta: '2025-12-05', fec: '05 de Diciembre del 2025'},
     // {id:29, titulo:'', mensaje:'', fecha: '06/12', fechaCompleta: '2025-12-06', fec: '06 de Diciembre del 2025'},
     // {id:30, titulo:'', mensaje:'', fecha: '07/12', fechaCompleta: '2025-12-07', fec: '07 de Diciembre del 2025'},
     // {id:31, titulo:'', mensaje:'', fecha: '08/12', fechaCompleta: '2025-12-08', fec: '08 de Diciembre del 2025'},
     // {id:32, titulo:'', mensaje:'', fecha: '09/12', fechaCompleta: '2025-12-09', fec: '09 de Diciembre del 2025'},
-    // {id:33, titulo:'', mensaje:'', fecha: '10/12', fechaCompleta: '2025-12-10', fec: '10 de Diciembre del 2025'}
   ];
 
   // Función para verificar si una carta está desbloqueada
   const estaDesbloqueada = (fechaCompleta) => {
-    // Obtener fecha actual en formato YYYY-MM-DD
     const hoy = new Date();
     const año = hoy.getFullYear();
     const mes = String(hoy.getMonth() + 1).padStart(2, '0');
     const dia = String(hoy.getDate()).padStart(2, '0');
     const fechaHoyStr = `${año}-${mes}-${dia}`;
     
-    // Comparar strings directamente (más confiable)
     const desbloqueada = fechaHoyStr >= fechaCompleta;
-    
-    console.log('Fecha hoy:', fechaHoyStr);
-    console.log('Fecha carta:', fechaCompleta);
-    console.log('¿Desbloqueada?:', desbloqueada);
-    
     return desbloqueada;
   };
 
@@ -95,15 +126,12 @@ export default function Home({ username, onLogout }) {
   };
 
   const guardarComoImagen = async () => {
-    // Importar html2canvas dinámicamente
     const html2canvas = (await import('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/+esm')).default;
     
     if (cartaRef.current) {
-      // Encontrar el textarea y guardarlo temporalmente
       const textarea = cartaRef.current.querySelector('.carta-texto');
       const textoOriginal = textarea.value;
       
-      // Crear un div temporal con el texto formateado
       const divTemporal = document.createElement('div');
       divTemporal.className = 'carta-texto-captura';
       divTemporal.style.cssText = `
@@ -120,14 +148,11 @@ export default function Home({ username, onLogout }) {
       `;
       divTemporal.textContent = textoOriginal;
       
-      // Reemplazar temporalmente el textarea con el div
       textarea.style.display = 'none';
       textarea.parentNode.insertBefore(divTemporal, textarea);
       
-      // Esperar un momento para que se renderice
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      // Capturar la imagen
       const canvas = await html2canvas(cartaRef.current, {
         backgroundColor: '#ffffff',
         scale: 2,
@@ -135,11 +160,9 @@ export default function Home({ username, onLogout }) {
         useCORS: true,
       });
       
-      // Restaurar el textarea
       divTemporal.remove();
       textarea.style.display = 'block';
       
-      // Descargar la imagen
       const link = document.createElement('a');
       link.download = `carta-${cartaActual.id}-${Date.now()}.jpg`;
       link.href = canvas.toDataURL('image/jpeg', 0.95);
@@ -149,6 +172,10 @@ export default function Home({ username, onLogout }) {
 
   return (
     <div className="home-container">
+      
+      {/* 1. Aquí mostramos los globos (usará el CSS de tu archivo externo) */}
+      <Globos />
+
       {/* Header con menú desplegable */}
       <header className="home-header">
         <h1 className="header-title">Cartitas para mi noviecita</h1>
@@ -187,6 +214,7 @@ export default function Home({ username, onLogout }) {
         </div>
       </header>
 
+      
       {/* Contenido principal */}
       <div className="home-content">
         <div className="welcome-section">
@@ -297,11 +325,6 @@ export default function Home({ username, onLogout }) {
                 <div className="carta-footer">
                   <p className="carta-firma">Con amor, para mi noviecita preciosa ❤️</p>
                   <div className="carta-fecha">
-                    {/* {new Date().toLocaleDateString('es-ES', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })} */}
                     {cartaActual?.fec}
                   </div>
                 </div>

@@ -1,7 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './App.css';
 
-// Credenciales válidas (puedes cambiarlas como quieras)
+// --- COMPONENTE DE GLOBOS (Nuevo) ---
+const Globos = () => {
+  // Usamos useMemo para que los globos no se recalculen en cada render
+  const balloons = useMemo(() => {
+    const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#FF9F43', '#54A0FF', '#ff7675'];
+    return Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      left: Math.floor(Math.random() * 100) + '%',
+      duration: (Math.floor(Math.random() * 5) + 5) + 's',
+      delay: Math.floor(Math.random() * 5) + 's',
+      scale: (Math.floor(Math.random() * 4) + 8) / 10
+    }));
+  }, []);
+
+  return (
+    <div className="balloon-container">
+      {balloons.map((b) => (
+        <div
+          key={b.id}
+          className="balloon"
+          style={{
+            backgroundColor: b.color,
+            left: b.left,
+            animationDuration: b.duration,
+            animationDelay: b.delay,
+            transform: `scale(${b.scale})`,
+            boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.1)'
+          }}
+        >
+          <div className="string"></div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// --- TU CÓDIGO ORIGINAL ---
+
 const VALID_CREDENTIALS = {
   usuario: 'Mi princesita hermosa',
   pin: '1124'
@@ -10,7 +48,7 @@ const VALID_CREDENTIALS = {
 const mensajesError = [
     '¿Intenta de nuevo preciosa? ❤️',
     '¿En algo te equivocaste, mi amor? 💕'
-  ];
+];
 
 export default function RomanticLogin({ onLoginSuccess }) {
   const [usuario, setUsuario] = useState('');
@@ -27,9 +65,10 @@ export default function RomanticLogin({ onLoginSuccess }) {
       return;
     }
 
-    // Validar credenciales
     if (usuario === VALID_CREDENTIALS.usuario && pin === VALID_CREDENTIALS.pin) {
-      onLoginSuccess(usuario);
+      // Si tienes una función externa, úsala, si no, puedes quitar el if
+      if(onLoginSuccess) onLoginSuccess(usuario);
+      else alert("¡Bienvenida mi amor!"); 
     } else {
       const mensajeAleatorio = mensajesError[intentos % mensajesError.length];
       setError(mensajeAleatorio);
@@ -50,7 +89,11 @@ export default function RomanticLogin({ onLoginSuccess }) {
 
   return (
     <div className="container">
-      {/* Corazones flotantes de fondo */}
+      
+      {/* 1. AQUÍ AGREGAMOS LOS GLOBOS */}
+      <Globos />
+
+      {/* Corazones flotantes de fondo (Tu código original) */}
       <div className="hearts-background">
         {[...Array(15)].map((_, i) => (
           <div
@@ -71,40 +114,35 @@ export default function RomanticLogin({ onLoginSuccess }) {
             </svg>
           </div>
         ))}
-        {/* Fuegos artificiales */}
+        
+        {/* Fuegos artificiales (Tu código original) */}
         {[...Array(8)].map((_, i) => (
-    <div
-        key={`firework-${i}`}
-        className="firework"
-        style={{
-            left: `${10 + Math.random() * 80}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            
-            // AUMENTAMOS la duración total de la animación:
-            animationDuration: `${4 + Math.random() * 3}s` 
-        }}
-    >
-        {/* Aquí añadimos el elemento para el rastro ascendente */}
-        <div className="firework-rocket"></div> 
-
-        {[...Array(12)].map((_, j) => (
             <div
-                key={`spark-${j}`}
-                className="spark"
+                key={`firework-${i}`}
+                className="firework"
                 style={{
-                    // Asumiendo que tus '--tx' y '--ty' están definidos en CSS por nth-child.
-                    // Si 'transform' es solo para la rotación del grupo, está bien.
-                    // Los '--tx' y '--ty' son para la distancia de cada chispa.
-                    transform: `rotate(${j * 30}deg)`
+                    left: `${10 + Math.random() * 80}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                    animationDuration: `${4 + Math.random() * 3}s` 
                 }}
-            />
+            >
+                <div className="firework-rocket"></div> 
+                {[...Array(12)].map((_, j) => (
+                    <div
+                        key={`spark-${j}`}
+                        className="spark"
+                        style={{
+                            transform: `rotate(${j * 30}deg)`
+                        }}
+                    />
+                ))}
+            </div>
         ))}
-    </div>
-))}
-{/* Círculos de brillo de fondo */}
-    <div className="background-burst" style={{ top: '20%', left: '15%', animationDelay: '0s' }}></div>
-    <div className="background-burst" style={{ bottom: '10%', right: '25%', animationDelay: '3s' }}></div>
-    <div className="background-burst" style={{ top: '60%', right: '10%', animationDelay: '6s' }}></div>
+
+        {/* Círculos de brillo de fondo */}
+        <div className="background-burst" style={{ top: '20%', left: '15%', animationDelay: '0s' }}></div>
+        <div className="background-burst" style={{ bottom: '10%', right: '25%', animationDelay: '3s' }}></div>
+        <div className="background-burst" style={{ top: '60%', right: '10%', animationDelay: '6s' }}></div>
       </div>
 
       {/* Contenedor principal */}
@@ -119,18 +157,17 @@ export default function RomanticLogin({ onLoginSuccess }) {
               />
             </svg>
           </div>
-          <h1 className="title">Te amooooo &lt;3</h1>
+          <h1 className="title">Feliz cumple &lt;3</h1>
         </div>
 
         {/* Lado derecho - Formulario */}
         <div className="right-side">
           <div className="form-card">
             <h2 className="form-title">
-              HOLA DE NUEVO<br />MI PRINCESITA HERMOSA &lt;3
+              Feliz cumpleaños a la niña<br />más increible del mundo &lt;3
             </h2>
 
             <div className="form-content">
-              {/* Mensaje de error */}
               {error && (
                 <div className="error-message">
                   {error}
@@ -152,12 +189,11 @@ export default function RomanticLogin({ onLoginSuccess }) {
                     onClick={() => setShowInfo({ ...showInfo, usuario: !showInfo.usuario })}
                     className="info-button"
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     <circle cx="12" cy="8" r="0.1" fill="currentColor"/>
                   </svg>
-
                   </button>
                 </div>
                 {showInfo.usuario && (
@@ -182,9 +218,9 @@ export default function RomanticLogin({ onLoginSuccess }) {
                     onClick={() => setShowInfo({ ...showInfo, pin: !showInfo.pin })}
                     className="info-button"
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>
+                    <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     <circle cx="12" cy="8" r="0.1" fill="currentColor"/>
                   </svg>
                   </button>
@@ -196,7 +232,6 @@ export default function RomanticLogin({ onLoginSuccess }) {
                 )}
               </div>
 
-              {/* Botón Iniciar */}
               <button onClick={handleSubmit} className="submit-button">
                 INICIAR
               </button>
