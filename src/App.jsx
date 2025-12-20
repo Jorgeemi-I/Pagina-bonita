@@ -157,14 +157,14 @@ export default function RomanticLogin({ onLoginSuccess }) {
               />
             </svg>
           </div>
-          <h1 className="title">Feliz cumple &lt;3</h1>
+          <h1 className="title">Te AMOOOO &lt;3</h1>
         </div>
 
         {/* Lado derecho - Formulario */}
         <div className="right-side">
           <div className="form-card">
             <h2 className="form-title">
-              Feliz cumpleaños a la niña<br />más increible del mundo &lt;3
+              Hola de nuevo,<br />amor de mi vida &lt;3
             </h2>
 
             <div className="form-content">

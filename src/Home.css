@@ -688,7 +688,7 @@
 }
 
 /* --- ESTILOS DE LOS GLOBOS --- */
-
+/*
 .balloon-container {
   position: fixed;
   top: 0;
@@ -696,11 +696,11 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  pointer-events: none; /* CLAVE: Permite dar clic en el formulario a través de los globos */
-  z-index: 1; /* Detrás del formulario pero delante del fondo base */
+  pointer-events: none; /* CLAVE: Permite dar clic en el formulario a través de los globos 
+  z-index: 1; /* Detrás del formulario pero delante del fondo base *
 }
 
-/* Ajusta el z-index de tu contenido principal para que esté por encima de los globos */
+/* Ajusta el z-index de tu contenido principal para que esté por encima de los globos *
 .main-content {
   position: relative;
   z-index: 10; 
@@ -751,4 +751,4 @@
     bottom: 110vh;
     transform: translateX(-20px) rotate(-5deg);
   }
-}
+}*/
